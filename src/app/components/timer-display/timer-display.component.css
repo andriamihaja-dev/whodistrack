@@ -1,0 +1,49 @@
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+.countdown-circle {
+  width: 120px;
+  height: 120px;
+  border: 5px solid #1db954;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulse 1s infinite;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.countdown-circle.final {
+  border-color: red;
+  animation: pulse 0.5s infinite;
+}
+
+.countdown-number {
+  font-size: 48px;
+  font-weight: bold;
+  color: #1db954;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.countdown-circle.final .countdown-number {
+  color: red;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

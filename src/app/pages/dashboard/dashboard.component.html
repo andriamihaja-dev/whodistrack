@@ -1,0 +1,32 @@
+<app-user-header
+  *ngIf="userInfo$ | async as user"
+  [user]="user"
+  (logout)="onLogout()"
+/>
+
+<!-- ⚙️ Paramètres de la partie -->
+<section class="settings-toggle">
+ <button class="toggle-settings-button" (click)="toggleSettings()">
+  ⚙️ Paramètres de jeu
+</button>
+
+
+  <app-game-settings *ngIf="showSettings" />
+</section>
+
+<!-- 🔍 Recherche de playlists -->
+<section class="search-section">
+  <app-search-playlists (select)="playWithPlaylist($event)" />
+</section>
+
+<!-- 🎵 Mes playlists -->
+<section class="playlist-section">
+  <h3>Mes playlists</h3>
+  <div class="playlist-list" *ngIf="playlists$ | async as playlists">
+    <app-playlist-card
+      *ngFor="let playlist of playlists"
+      [playlist]="playlist"
+      (select)="playWithPlaylist($event)"
+    />
+  </div>
+</section>

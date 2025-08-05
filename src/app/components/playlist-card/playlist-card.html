@@ -1,0 +1,12 @@
+<div class="playlist-card">
+  <img
+    *ngIf="playlist.images?.[0]?.url"
+    [src]="playlist.images[0].url"
+    alt="Cover"
+    class="cover"
+  />
+  <div class="details">
+    <strong>{{ playlist.name }}</strong>
+    <button (click)="selectPlaylist()">Jouer 🎵</button>
+  </div>
+</div>

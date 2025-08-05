@@ -1,0 +1,82 @@
+<div class="settings-panel">
+  <h3>🎛️ Paramètres de la partie</h3>
+
+  <label for="roundDuration">
+    Durée d’un round (sec) :
+    <input
+      type="number"
+      id="roundDuration"
+      name="roundDuration"
+      [(ngModel)]="roundDuration"
+      min="5"
+      max="60"
+    />
+  </label>
+
+  <label for="trackCount">
+    Nombre de morceaux :
+    <input
+      type="number"
+      id="trackCount"
+      name="trackCount"
+      [(ngModel)]="trackCount"
+      min="5"
+      max="20"
+    />
+  </label>
+
+  <label for="showTimer">
+    <input
+      type="checkbox"
+      id="showTimer"
+      name="showTimer"
+      [(ngModel)]="showTimer"
+    />
+    Afficher le timer
+  </label>
+
+  <label for="hardcoreMode">
+    <input
+      type="checkbox"
+      id="hardcoreMode"
+      name="hardcoreMode"
+      [(ngModel)]="hardcoreMode"
+    />
+    Mode hardcore (aucun indice)
+  </label>
+
+  <label for="guestEnabled">
+    <input
+      type="checkbox"
+      id="guestEnabled"
+      name="guestEnabled"
+      [(ngModel)]="guestEnabled"
+    />
+    Activer chanson invitée
+  </label>
+
+  <div *ngIf="guestEnabled">
+    <label for="guestSearch">
+      Rechercher une chanson :
+      <input
+        type="text"
+        id="guestSearch"
+        name="guestSearch"
+        [formControl]="searchControl"
+        placeholder="Rechercher un titre..."
+        autocomplete="off"
+      />
+    </label>
+
+    <ul *ngIf="results.length > 0" class="results">
+      <li
+        *ngFor="let track of results"
+        (click)="selectTrackAsGuest(track)"
+      >
+        {{ track.name }} – {{ track.artists[0].name }}
+      </li>
+    </ul>
+  </div>
+
+  <button class="apply-button" (click)="applyChanges()">✅ Appliquer</button>
+</div>

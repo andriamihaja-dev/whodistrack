@@ -1,0 +1,52 @@
+.playlist-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+hr {
+  margin: 3rem auto;
+  width: 50%;
+}
+
+.settings-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.settings-toggle button {
+  margin-bottom: 1rem;
+}
+
+.search-section {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.toggle-settings-button {
+  padding: 0.5rem 1.25rem;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+  transition: background-color 0.25s ease, transform 0.1s ease;
+}
+
+.toggle-settings-button:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+}
+

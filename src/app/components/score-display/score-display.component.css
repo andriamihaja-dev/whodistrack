@@ -1,0 +1,13 @@
+.score-display {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #1db954;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  font-size: 1rem;
+  z-index: 10;
+}

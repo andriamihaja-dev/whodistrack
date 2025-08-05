@@ -1,0 +1,42 @@
+<div class="search-container">
+  <h3>Rechercher une playlist Spotify</h3>
+
+  <div class="search-box">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchChange()"
+      (focus)="showSuggestions = true"
+      (blur)="hideSuggestions()"
+      placeholder="Rechercher une playlist"
+      autocomplete="off"
+    />
+    <button class="search-icon" disabled>
+      <span>🔍</span>
+    </button>
+  </div>
+
+  <!-- Suggestions -->
+  <ul *ngIf="showSuggestions && suggestions.length > 0" class="autocomplete-suggestions">
+    <li
+      *ngFor="let suggestion of suggestions"
+      (click)="selectSuggestion(suggestion)"
+    >
+      <img *ngIf="suggestion.images?.[0]" [src]="suggestion.images[0].url" alt="cover" />
+      <span>{{ suggestion.name }}</span>
+    </li>
+  </ul>
+
+  <!-- Résultats -->
+  <div *ngIf="results$ | async as results">
+    <div *ngIf="results.length === 0" class="no-result">Aucune playlist trouvée.</div>
+
+    <div class="playlist-list">
+      <app-playlist-card
+        *ngFor="let playlist of results"
+        [playlist]="playlist"
+        (select)="onPlaylistSelect(playlist.id)"
+      ></app-playlist-card>
+    </div>
+  </div>
+</div>

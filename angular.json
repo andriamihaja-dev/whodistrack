@@ -22,6 +22,7 @@
               }
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ]
           },
@@ -50,17 +51,25 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "whodistrack:build:production"
-            },
-            "development": {
-              "buildTarget": "whodistrack:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
+  "builder": "@angular/build:dev-server",
+  "options": {
+    "host": "127.0.0.1",
+    "allowedHosts": [
+      "e8d71fef4f27.ngrok-free.app"
+    ],
+    "port": 4200
+  },
+  "configurations": {
+    "production": {
+      "buildTarget": "whodistrack:build:production"
+    },
+    "development": {
+      "buildTarget": "whodistrack:build:development"
+    }
+  },
+  "defaultConfiguration": "development"
+}
+,
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },

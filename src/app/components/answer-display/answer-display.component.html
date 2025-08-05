@@ -1,0 +1,7 @@
+<div class="answer-display" *ngIf="track">
+  <p *ngIf="wasCorrect">✅ Bien joué ! C'était :</p>
+  <p *ngIf="!wasCorrect">⏱️ Fin du round. Voici la bonne réponse :</p>
+
+  <h3>{{ track.name }}</h3>
+  <p><strong>Artiste(s):</strong> {{ getArtistsNames() }}</p>
+</div>

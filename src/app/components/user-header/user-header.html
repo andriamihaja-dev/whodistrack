@@ -1,0 +1,10 @@
+<header class="user-header">
+  <img
+    *ngIf="user?.images?.[0]?.url"
+    [src]="user.images[0].url"
+    alt="Avatar"
+    class="avatar"
+  />
+  <span class="username">Bienvenue {{ user.display_name }}</span>
+  <button (click)="onLogout()">Déconnexion</button>
+</header>

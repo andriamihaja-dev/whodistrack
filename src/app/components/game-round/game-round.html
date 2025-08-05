@@ -1,0 +1,61 @@
+<div class="game-container" *ngIf="!error && currentTrack">
+  <!-- Score affiché en haut -->
+  <app-score-display [score]="localScore" />
+
+  <!-- Jaquette de l'album -->
+  <div
+    class="album-cover-container"
+    [ngStyle]="{
+      'background-image': !currentTrack.album?.images?.[0]?.url
+        ? 'url(https://picsum.photos/320/320?blur=3)'
+        : 'none'
+    }"
+  >
+    <img
+      *ngIf="answerShown && currentTrack.album?.images?.[0]?.url"
+      [src]="currentTrack.album.images[0].url"
+      alt="Cover"
+      class="cover"
+    />
+
+    <!-- Timer visuel (ancien style cinéma) -->
+    <app-timer-display *ngIf="!answerShown" [timeLeft]="timeLeft" [totalTime]="roundTime" />
+  </div>
+
+  <!-- Nom de la piste -->
+  <h2 *ngIf="answerShown; else hiddenTitle">{{ currentTrack.name }}</h2>
+  <ng-template #hiddenTitle>
+    <h2>???</h2>
+  </ng-template>
+
+  <!-- Artiste(s) -->
+  <h3 *ngIf="answerShown; else hiddenArtist">{{ getArtistsNames() }}</h3>
+  <ng-template #hiddenArtist>
+    <h3>???</h3>
+  </ng-template>
+
+  <!-- Input utilisateur (réponse) -->
+  <app-answer-input
+    *ngIf="!answerShown"
+    (answerSubmitted)="validateAnswer($event)"
+  />
+  <div class="error-message" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+
+  <!-- Affichage de la réponse après le round -->
+  <app-answer-display
+    *ngIf="answerShown"
+    [track]="currentTrack"
+    [wasCorrect]="wasCorrect"
+  />
+
+  <!-- Boutons -->
+  <div class="buttons">
+    <button *ngIf="showNextButton" (click)="nextTrack()" class="btn-next">
+      Passer au suivant ▶️
+    </button>
+    <button (click)="quit()" class="btn-quit">Quitter</button>
+  </div>
+</div>

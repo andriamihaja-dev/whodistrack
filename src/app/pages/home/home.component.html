@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+  <span>Whodistrack 🎵</span>
+</mat-toolbar>
+
+<div class="home-container">
+  <h1>Bienvenue sur Whodistrack</h1>
+  <p>Joue à deviner les musiques de tes playlists Spotify !</p>
+
+  <button mat-raised-button color="primary" *ngIf="!user" (click)="login()">
+    Se connecter à Spotify
+  </button>
+
+  <button mat-stroked-button color="warn" *ngIf="user" (click)="logout()">
+    Déconnexion
+  </button>
+
+  <div *ngIf="user" class="content">
+    <h2>Bienvenue {{ user.display_name }} !</h2>
+    <p>Email : {{ user.email }}</p>
+  </div>
+
+  <ul *ngIf="user?.playlists?.length > 0">
+    <li *ngFor="let p of user.playlists">{{ p.name }}</li>
+  </ul>
+
+  <p *ngIf="randomPlaylist">{{ randomPlaylist.name }}</p>
+</div>
