@@ -21,6 +21,8 @@ export class AuthCallbackComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('[AUTH_CALLBACK] Le composant a bien démarré.');
+
     this.route.queryParams.subscribe(params => {
       const code = params['code'];
       const verifier = localStorage.getItem('code_verifier');
