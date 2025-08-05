@@ -48,7 +48,8 @@ export class SpotifyAuthService {
     console.log('[DEBUG] redirect URI utilisé:', this.redirectUri);
     console.log('[DEBUG] URL finale Spotify :', `https://accounts.spotify.com/authorize?${params.toString()}`);
 
-    /*window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;*/
+    window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
+
   }
 
   exchangeCodeForToken(code: string) {
