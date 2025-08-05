@@ -52,19 +52,24 @@ export class SpotifyAuthService {
   }
 
   exchangeCodeForToken(code: string) {
-    const verifier = localStorage.getItem('code_verifier') ?? '';
+  const verifier = localStorage.getItem('code_verifier') ?? '';
 
-    const body = new HttpParams()
-      .set('client_id', this.clientId)
-      .set('grant_type', 'authorization_code')
-      .set('code', code)
-      .set('redirect_uri', this.redirectUri)
-      .set('code_verifier', verifier);
+  console.log('[DEBUG] Code reçu:', code);
+  console.log('[DEBUG] Redirect URI utilisé:', this.redirectUri);
+  console.log('[DEBUG] Code Verifier utilisé:', verifier);
 
-    return this.http.post('https://accounts.spotify.com/api/token', body.toString(), {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
-    });
-  }
+  const body = new HttpParams()
+    .set('client_id', this.clientId)
+    .set('grant_type', 'authorization_code')
+    .set('code', code)
+    .set('redirect_uri', this.redirectUri)
+    .set('code_verifier', verifier);
+
+  return this.http.post('https://accounts.spotify.com/api/token', body.toString(), {
+    headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
+  });
+}
+
 
   storeAccessToken(token: string) {
     localStorage.setItem('access_token', token);
