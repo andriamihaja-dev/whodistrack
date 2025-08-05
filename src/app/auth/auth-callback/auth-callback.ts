@@ -7,8 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({
   standalone: true,
   selector: 'app-auth-callback',
-  template: `<p>Connexion en cours...</p>`,
-  imports: [CommonModule, HttpClientModule]
+  template: `
+    <p>Connexion en cours...</p>
+  `,
+  imports: [CommonModule, HttpClientModule],
 })
 export class AuthCallbackComponent implements OnInit {
 
@@ -19,28 +21,36 @@ export class AuthCallbackComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  this.route.queryParams.subscribe(params => {
-    const code = params['code'];
-    const verifier = localStorage.getItem('code_verifier');
+    this.route.queryParams.subscribe(params => {
+      const code = params['code'];
+      const verifier = localStorage.getItem('code_verifier');
 
-    if (!code || !verifier) {
-      // Si le verifier est manquant, on redirige vers login (flow cassé)
-      this.router.navigate(['/home']);
-      return;
-    }
+      console.log('[CALLBACK] code:', code);
+      console.log('[CALLBACK] verifier:', verifier);
+      console.log('[CALLBACK] redirectUri utilisé:', this.spotifyAuthService['redirectUri']);
 
-    this.spotifyAuthService.exchangeCodeForToken(code).subscribe({
-      next: (response: any) => {
-        this.spotifyAuthService.storeAccessToken(response.access_token);
-        this.router.navigate(['/dashboard']);
-      },
-      error: () => {
-        // En cas d'échec, mieux vaut forcer une nouvelle connexion
-        this.spotifyAuthService.logout();
+      if (!code || !verifier) {
+        console.warn('[CALLBACK] Code ou verifier manquant. Redirection vers /home.');
         this.router.navigate(['/home']);
+        return;
       }
-    });
-  });
-}
 
+      this.spotifyAuthService.exchangeCodeForToken(code).subscribe({
+        next: (response: any) => {
+          const accessToken = response.access_token;
+          console.log('[CALLBACK] Token reçu :', accessToken);
+
+          this.spotifyAuthService.storeAccessToken(accessToken);
+          console.log('[CALLBACK] Token stocké. Redirection vers /dashboard');
+
+          this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+          console.error('[CALLBACK] Erreur lors de l’échange code → token :', error);
+          this.spotifyAuthService.logout();
+          this.router.navigate(['/home']);
+        }
+      });
+    });
+  }
 }
