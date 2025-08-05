@@ -7,7 +7,7 @@ import { environment } from '../../env/environment';
 @Injectable({ providedIn: 'root' })
 export class SpotifyAuthService {
   private clientId = environment.spotify.clientId;
-private redirectUri = environment.spotify.redirectUri;
+private redirectUri = 'https://whodistrack-3j000zs6v-miadzs-projects.vercel.app/auth/callback';
 private scopes = environment.spotify.scopes;
 
 
