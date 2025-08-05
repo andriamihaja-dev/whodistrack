@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { environment } from '../env/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +9,4 @@ import { environment } from '../env/environment';
 })
 export class App {
   protected readonly title = signal('whodistrack');
-  redirectUri = environment.spotify.redirectUri;
 }

@@ -10,7 +10,7 @@ export class SpotifyAuthService {
   private redirectUri = environment.spotify.redirectUri;
   private scopes = environment.spotify.scopes;
 
-
+  
 
   constructor(private http: HttpClient) {}
 
@@ -44,6 +44,9 @@ export class SpotifyAuthService {
       code_challenge: challenge,
       prompt: 'login'
     });
+    
+    console.log('[DEBUG] redirect URI utilisé:', this.redirectUri);
+    console.log('[DEBUG] URL finale Spotify :', `https://accounts.spotify.com/authorize?${params.toString()}`);
 
     window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
   }
