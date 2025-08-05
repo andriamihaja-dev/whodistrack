@@ -45,7 +45,9 @@ export class SpotifyAuthService {
       prompt: 'login'
     });
 
-    window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    setTimeout(() => {
+  window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
+}, 500);
 
   }
 
