@@ -44,9 +44,6 @@ export class SpotifyAuthService {
       code_challenge: challenge,
       prompt: 'login'
     });
-    
-    console.log('[DEBUG] redirect URI utilisé:', this.redirectUri);
-    console.log('[DEBUG] URL finale Spotify :', `https://accounts.spotify.com/authorize?${params.toString()}`);
 
     window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
 
@@ -58,6 +55,12 @@ export class SpotifyAuthService {
   console.log('[DEBUG] Code reçu:', code);
   console.log('[DEBUG] Redirect URI utilisé:', this.redirectUri);
   console.log('[DEBUG] Code Verifier utilisé:', verifier);
+  console.log('--- DEBUG Spotify Token Exchange ---');
+console.log('redirect_uri:', this.redirectUri);
+console.log('client_id:', this.clientId);
+console.log('code_verifier:', verifier);
+console.log('code:', code);
+
 
   const body = new HttpParams()
     .set('client_id', this.clientId)
